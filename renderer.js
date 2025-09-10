@@ -1,6 +1,5 @@
-// Import necessary libraries
-const interact = require('interactjs');
-const LeaderLine = require('leader-line-new');
+// Libraries are now loaded via <script> tags in index.html,
+// so they are available as global variables (interact, LeaderLine).
 
 // --- Global State ---
 const lines = [];
