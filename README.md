@@ -1,99 +1,50 @@
-# Утилита для переноса данных Excel
+# DataFlow - A Visual Data Transfer Application
 
-Это простое консольное приложение для парсинга данных из одного файла Excel (`source.xlsx`) и вставки их в другой файл Excel (`destination.xlsx`) в определённые места.
+DataFlow is a desktop application designed to revolutionize data transfer, transforming it from a complex, code-driven task into a simple, visual, and intuitive process. Built for non-technical users, DataFlow removes the need for scripting or complex configurations.
 
-## Особенности
+The user experience is centered around a clean, visual canvas where users can literally see their data's journey by connecting sources to destinations.
 
--   **Перенос данных по ключу**: Сопоставляет строки в исходном и целевом файлах по значениям в колонке `KEY`.
--   **Гибкость**: Легко адаптируется для работы с разными именами файлов, листов и колонок.
--   **Обработка ошибок**: Предусмотрены проверки на отсутствие файлов, листов или необходимых колонок.
--   **Командная строка**: Удобный запуск и настройка через аргументы командной строки.
--   **Тесты**: Включает набор юнит-тестов для проверки корректности работы.
+## Features
+- **Visual Mapping:** Drag and drop data sources onto a canvas and draw lines between fields to create a transfer map.
+- **File System Integration:** Add local Excel files as data sources.
+- **Live Preview:** Instantly see a preview of how data will be transferred when you connect two fields.
+- **Full Data Transfer:** Execute the complete data transfer based on your visual map and save the output to a new Excel file.
+- **Error Handling:** A status bar provides clear feedback on successes and errors.
+- **Dynamic UI:** Select and delete nodes and connections on the canvas.
 
-## Требования
+## Getting Started
 
--   Python 3.8+
--   Библиотеки, перечисленные в `requirements.txt` (`pandas`, `openpyxl`).
+### Prerequisites
+- [Node.js](https://nodejs.org/) (which includes npm)
+- [Git](https://git-scm.com/)
 
-## Установка
+### Installation & Running
 
-1.  **Клонируйте репозиторий**:
+1.  **Clone the repository:**
     ```bash
-    git clone <repository_url>
-    cd excel-parse
+    git clone <URL_OF_THE_REPO>
+    cd <repository_folder_name>
     ```
 
-2.  **Установите зависимости**:
-    Рекомендуется использовать виртуальное окружение.
+2.  **Install dependencies:**
+    This command reads the `package.json` file and installs all necessary libraries, including Electron.
     ```bash
-    python -m venv venv
-    source venv/bin/activate  # Для Windows: venv\Scripts\activate
-    pip install -r requirements.txt
+    npm install
     ```
 
-## Использование
+3.  **Run the application:**
+    This command starts the Electron application.
+    ```bash
+    npm start
+    ```
 
-Для запуска скрипта используйте следующую команду:
-
-```bash
-python src/main.py <source_file> <destination_file> [--sheet <sheet_name>]
-```
-
--   `<source_file>`: Имя исходного файла в папке `data`.
--   `<destination_file>`: Имя целевого файла в папке `data`.
--   `--sheet <sheet_name>`: (Опционально) Имя листа Excel для обработки. По умолчанию `Sheet1`.
-
-### Пример запуска
-
-```bash
-python src/main.py source.xlsx destination.xlsx
-```
-
-После выполнения команды данные из `data/source.xlsx` будут перенесены в `data/destination.xlsx`.
-
-## Формат входных файлов
-
-### `source.xlsx`
-
-Исходный файл должен содержать как минимум три колонки:
--   `KEY`: Уникальный идентификатор для сопоставления строк.
--   `VALUE_1`: Первое значение для переноса.
--   `VALUE_2`: Второе значение для переноса.
-
-**Пример `data/source.xlsx`:**
-
-| KEY | VALUE_1 | VALUE_2 |
-|-----|---------|---------|
-| A   | 100     | X1      |
-| B   | 200     | Y1      |
-| C   | 300     | Z1      |
-
-### `destination.xlsx`
-
-Целевой файл должен содержать колонку `KEY` и колонки для вставки данных (например, `DATA_A` и `DATA_B`).
-
-**`data/destination.xlsx` *до* выполнения скрипта:**
-
-| KEY | DATA_A | DATA_B | SOME_OTHER_COLUMN |
-|-----|--------|--------|-------------------|
-| C   |        |        | foo               |
-| A   |        |        | bar               |
-| B   |        |        | baz               |
-| E   | 999    | Q4     | qux               |
-
-**`data/destination.xlsx` *после* выполнения скрипта:**
-
-| KEY | DATA_A | DATA_B | SOME_OTHER_COLUMN |
-|-----|--------|--------|-------------------|
-| C   | 300    | Z1     | foo               |
-| A   | 100    | X1     | bar               |
-| B   | 200    | Y1     | baz               |
-| E   | 999    | Q4     | qux               |
-
-## Запуск тестов
-
-Для проверки корректности работы приложения можно запустить юнит-тесты:
-
-```bash
-python -m unittest tests/test_main.py
-```
+## How It Works
+1.  Click the "Add Source File" button to select an Excel file from your computer.
+2.  A new draggable item representing your file will appear in the "Sources" panel.
+3.  Drag this item onto the central canvas. A "node" will be created.
+4.  Click the header of the node to expand it and view the column headers from your file.
+5.  Create multiple nodes (e.g., another source or a destination).
+6.  Click and drag from a field's handle on one node to a handle on another node to create a connection.
+7.  View the "Live Preview" panel at the bottom to see a sample of the data transfer.
+8.  Click the "Run Transfer" button to execute the full data transfer and save the result to a new file.
+9.  To delete a node or connection, click on it to select it, then press the `Delete` or `Backspace` key.
