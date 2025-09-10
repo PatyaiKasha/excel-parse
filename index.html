@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>DataFlow</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app-container">
+      <div id="source-panel" class="panel">
+        <h2>Sources</h2>
+        <div class="panel-controls">
+            <button id="add-source-btn" class="btn">Add Source File</button>
+        </div>
+        <div id="source-list">
+            <!-- Draggable items will be added here -->
+        </div>
+      </div>
+      <div id="canvas-panel" class="panel dropzone">
+        <div id="canvas-main">
+            <div id="canvas-controls">
+                <button id="run-transfer-btn" class="btn">Run Transfer</button>
+            </div>
+            <h2>Canvas</h2>
+            <!-- Dropped items will appear here -->
+        </div>
+        <div id="preview-panel">
+            <div id="preview-header">Live Preview</div>
+            <div id="preview-content">
+                <p>Connect two fields to see a preview of the data transfer.</p>
+            </div>
+        </div>
+      </div>
+      <div id="destination-panel" class="panel">
+        <h2>Destinations</h2>
+        <div class="panel-controls">
+            <button id="add-dest-btn" class="btn">Create New Destination</button>
+        </div>
+        <div id="destination-list">
+            <!-- Draggable destination items will be added here -->
+        </div>
+      </div>
+    </div>
+    <div id="status-bar">
+        <p id="status-message">Ready</p>
+    </div>
+    <script src="./renderer.js"></script>
+  </body>
+</html>
